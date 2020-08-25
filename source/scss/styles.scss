@@ -1,3 +1,5 @@
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
 body {
 	margin: 0;
 	background: {
@@ -7,5 +9,8 @@ body {
 		attachment: fixed;
 		size: cover;
 	}
+}
 
+nav {
+	background-color: rgba(255,255,255, 0.5);
 }

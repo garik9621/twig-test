@@ -1,2 +1,5 @@
 # Project exclude paths
 /node_modules/
+/build/css/
+/build/pages/
+/build/js/
