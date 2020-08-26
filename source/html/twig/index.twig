@@ -1,4 +1,37 @@
 {% extends './common/layout.twig' %}
 {% block page %}
-    hello world
+
+    <div class="container pt-5">
+        hello world
+
+        {% if posts.length > 0 %}
+
+            <div class="mt-5">
+                <div class="row">
+
+                    {% for item in posts %}
+
+                        <div class="col-6 mb-3">
+
+                            <div class="card">
+                                <img src="{{ item.img }}" class="card-img-top p-5" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ item.title }}</h5>
+                                    <p class="card-text">{{ item.text }}</p>
+                                    <a href="{{ item.link }}" class="btn btn-primary">Go more</a>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        {% endif %}
+    </div>
+
+
 {% endblock %}

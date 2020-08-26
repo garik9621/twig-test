@@ -5,29 +5,16 @@ const twig = require('gulp-twig')
 const browserSync = require('browser-sync').create()
 const del = require('del')
 const sass = require('gulp-sass')
+const data = require('gulp-data')
+const fs = require('fs')
+const path = require('path')
 //const babel = require('gulp-babel')
-
-const twigData = {
-	nav: [
-		{link: '#1', name: 'Ссылка 1'},
-		{link: '#2', name: 'Ссылка 2'},
-		{link: '#3', name: 'Ссылка 3'},
-		{link: '#4', name: 'Ссылка 4'},
-	],
-	posts: [
-		{
-			title: 'Заголовок блока',
-			link: '#link1',
-			img: '',
-			text: 'зимут прекрасно решает радиант. Вселенная достаточно огромна, чтобы Южный Треугольник ничтожно перечеркивает астероидный Юпитер. У планет-гигантов нет твёрдой поверхности, таким образом узел вызывает сарос, в таком случае эксцентриситеты и наклоны орбит возрастают. '
-		}
-	]
-}
 
 const sourcePaths = {
 	pages: 'source/html/*.html',
 	twig: 'source/html/twig/index.twig',
-	scss: 'source/scss/styles.scss'
+	scss: 'source/scss/styles.scss',
+	data: 'source/data/'
 }
 
 const buildPaths = {
@@ -38,10 +25,10 @@ const buildPaths = {
 
 const buildTwigPage = function() {
 	return src(sourcePaths.twig)
-		.pipe(twig({
-			data: twigData,
-			useFileContents: true
+		.pipe(data(file => {
+			return JSON.parse(fs.readFileSync((sourcePaths.data + path.basename(file.path) + '.json')))
 		}))
+		.pipe(twig())
 		.pipe(dest(buildPaths.pages))
 }
 
